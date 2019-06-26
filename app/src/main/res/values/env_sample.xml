@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="address">123.123.123.123</string>
-    <string name="port">25252</string>
+    <!--<string name="address">123.123.123.123</string>-->
+    <!--<string name="port">25252</string>-->
 </resources>
