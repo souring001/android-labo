@@ -7,6 +7,7 @@ import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -25,11 +26,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     float[] geomagnetic = new float[3];
     float[] attitude = new float[3];
 
+    TextView yawText;
+    TextView pitchText;
+    TextView rollText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        findViews();
         initSensor();
 
         final int port = Integer.parseInt(getString(R.string.port));
@@ -41,11 +47,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             public void run() {
                 while(true){
 
-                    String msg = "Hello World! I'm Android";
+//                    Log.d(TAG, Integer.toString((int)(attitude[0] * RAD2DEG)));
+//                    Log.d(TAG, Integer.toString((int)(attitude[1] * RAD2DEG)));
+//                    Log.d(TAG, Integer.toString((int)(attitude[2] * RAD2DEG)));
 
-                    Log.d(TAG, Integer.toString((int)(attitude[0] * RAD2DEG)));
-                    Log.d(TAG, Integer.toString((int)(attitude[1] * RAD2DEG)));
-                    Log.d(TAG, Integer.toString((int)(attitude[2] * RAD2DEG)));
+                    String msg = Integer.toString((int)(attitude[1] * RAD2DEG));    // pitch
 
                     try {
                         InetAddress IPAddress = InetAddress.getByName(address);
@@ -63,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     }
 
                     try {
-                        Thread.sleep(1000); // 1 sec
+                        Thread.sleep(66);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -71,6 +77,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
 
         }).start();
+    }
+
+    protected void findViews(){
+        yawText = findViewById(R.id.yaw);
+        pitchText = findViewById(R.id.pitch);
+        rollText = findViewById(R.id.roll);
     }
 
     protected void initSensor(){
@@ -117,6 +129,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             SensorManager.getOrientation(
                     rotationMatrix,
                     attitude);
+
+            yawText.setText(Integer.toString(
+                    (int)(attitude[0] * RAD2DEG)));
+            pitchText.setText(Integer.toString(
+                    (int)(attitude[1] * RAD2DEG)));
+            rollText.setText(Integer.toString(
+                    (int)(attitude[2] * RAD2DEG)));
 
         }
     }
