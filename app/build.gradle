@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "io.souring001.udptest"
+        applicationId "io.souring001.androidlabocontroller"
         minSdkVersion 14
         targetSdkVersion 28
         versionCode 1

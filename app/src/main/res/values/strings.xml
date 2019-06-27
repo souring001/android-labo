@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">UDPTest</string>
+    <string name="app_name">AndroidLaboController</string>
     <string name="toast_no_sensor_manager">No sensor manager available</string>
 </resources>

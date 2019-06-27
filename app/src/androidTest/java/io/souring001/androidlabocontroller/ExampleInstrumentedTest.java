@@ -1,4 +1,4 @@
-package io.souring001.udptest;
+package io.souring001.androidlabocontroller;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
