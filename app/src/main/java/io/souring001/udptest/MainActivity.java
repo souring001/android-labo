@@ -19,6 +19,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private final static String TAG = MainActivity.class.getSimpleName();
     final static double RAD2DEG = 180/Math.PI;
 
+    final static String controller = "pedal";
+//    final static String controller = "handle";
+
     SensorManager sensorManager;
 
     float[] rotationMatrix = new float[9];
@@ -51,7 +54,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 //                    Log.d(TAG, Integer.toString((int)(attitude[1] * RAD2DEG)));
 //                    Log.d(TAG, Integer.toString((int)(attitude[2] * RAD2DEG)));
 
-                    String msg = Integer.toString((int)(attitude[1] * RAD2DEG));    // pitch
+                    String header = "{ \"controller\" : \"" + controller + "\", \"pitch\" : " ;
+                    String val = Integer.toString((int)(attitude[1] * RAD2DEG));
+                    String footer = " }";
+
+                    // send message as JSON
+                    // { "controller" : "pedal", "pitch" : -4 }
+
+                    String msg = header + val + footer;
 
                     try {
                         InetAddress IPAddress = InetAddress.getByName(address);
