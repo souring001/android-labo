@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Context;
+import android.os.Vibrator;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -72,6 +74,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                         Log.d(TAG, "Sent a packet:" + msg);
                     }catch(IOException e) {
                         Log.d(TAG, e.getMessage());
+                    }
+
+                    if((int)(attitude[1] * RAD2DEG) > -20 && controller.equals("pedal")) {
+                        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                        vibrator.vibrate(66);
                     }
 
                     try {
