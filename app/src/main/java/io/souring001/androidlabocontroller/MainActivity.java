@@ -50,15 +50,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             public void run() {
                 while(true){
 
-//                    Log.d(TAG, Integer.toString((int)(attitude[0] * RAD2DEG)));
-//                    Log.d(TAG, Integer.toString((int)(attitude[1] * RAD2DEG)));
-//                    Log.d(TAG, Integer.toString((int)(attitude[2] * RAD2DEG)));
-
                     String header = "{ \"controller\" : \"" + controller + "\", \"pitch\" : " ;
                     String val = Integer.toString((int)(attitude[1] * RAD2DEG));
                     String footer = " }";
 
-                    // send message as JSON
+                    // send message in JSON format as follows:
                     // { "controller" : "pedal", "pitch" : -4 }
 
                     String msg = header + val + footer;
